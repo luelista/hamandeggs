@@ -1,0 +1,42 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.page-header {
+    padding: 20px 20px 10px;
+    margin: 0 0 10px;
+    background: #f7f7f7;
+    box-shadow: inset 0px -1px 6px #e8e8e8;
+    border: 1px solid #ccc;
+    border-top: 0 none;
+}
+
+ul.question-block {
+    span.question {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        line-height: 20px;
+        border: 1px solid transparent;
+        -webkit-border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0;
+        border: 1px solid #DDD;
+        padding-right: 12px;
+        padding-left: 12px;
+        display: block;
+        background: #eee;
+        color: #000;
+    }
+    > li > a {
+        padding-left: 35px;
+        color: #333;
+        .label { margin-left: -23px; margin-right: 2px; }
+    }
+    > li > a.success {
+        background-color: #DFF0D8;
+    }
+}
+
+.examtypesel a { text-align: left; cursor: default; }
+.examtypesel a label { margin: 2px 0; cursor: pointer; }
+.examtypesel a input { margin: -2px 4px 2px 0; }

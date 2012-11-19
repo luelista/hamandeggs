@@ -1,0 +1,12 @@
+<div style="height: 30px;"></div>
+<div class="row"><div class="offset3 span6">
+<div class="alert alert-block alert-info">
+<h4>Wähle ein Kapitel</h4>
+
+<% @chapters.each do |ch| %>
+<li><a href="<%= ask_chapter_url(:dispid => ch.dispid) %>"><%= ch.name %></a></li>
+
+<% end %>
+</div>
+</div>
+</div>

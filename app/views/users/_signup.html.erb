@@ -1,0 +1,35 @@
+  <%= form_for @newUser, :url => signup_url, :html => {:class => "form"} do |f| %>
+    <fieldset><legend>Prüfungsart</legend>
+    <div class="examtypesel btn-group btn-group-vertical">
+      <a href="javascript://" class="btn"><label for="p_kle">
+      <input type="radio" name="user[exam_type]" id="p_kle" value="e">
+      Prüfung zur Klasse E</label></a>
+      <a href="javascript://" class="btn"><label for="p_kla">
+      <input type="radio" name="user[exam_type]" id="p_kla" value="a">
+      Prüfung zur Klasse A</label></a>
+      
+      <a href="javascript://" class="btn"><label for="p_klea">
+      <input type="radio" name="user[exam_type]" id="p_klea" value="e-a">
+      Erweiterungsprüfung von E zu A</label></a>
+      
+    </div>
+    </fieldset>
+    <br>
+      
+    <fieldset>
+      <legend>Zugangsdaten</legend>
+      
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+      
+      <%= f.label :password %>
+      <%= f.text_field :password %>
+      
+      <%= f.label :password_confirmation %>
+      <%= f.text_field :password_confirmation %>
+    </fieldset>
+    
+    <div class="form-actions">
+      <%= f.submit :value => "Jetzt kostenlos anmelden", :class => "btn btn-success" %>
+    </div>
+  <% end %>

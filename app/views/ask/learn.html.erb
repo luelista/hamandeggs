@@ -1,0 +1,131 @@
+
+<div class="row">
+<div class="span7"><h1>Übung macht den Meister!</h1>
+
+
+<ul class="nav nav-tabs nav-stacked question-block">
+  <li><span class="question"></span></li>
+  <li><a href="#" accesskey="a"></a></li>
+  <li><a href="#" accesskey="b"></a></li>
+  <li><a href="#" accesskey="c"></a></li>
+  <li><a href="#" accesskey="d"></a></li>
+</ul>
+
+
+</div>
+
+<div class="span5">
+<% if current_user then %>
+  <script>window.login=true;</script>
+  <h3>Statistik</h3>
+  <div id="ministats">
+  <%= render "ministats" %>
+  </div>
+<% else %>
+  <script>window.login=false;</script>
+  <br>
+  <div class="alert alert-block">
+    <button class="close">&times;</button>
+    <h4>Du bist nicht eingeloggt!</h4>
+    <p>Zum optimalen Lernen solltest du dich registrieren oder einloggen, da
+    nur so dein Fortschritt gespeichert werden kann, um dir die Fragen anzuzeigen,
+    bei denen Du noch Probleme hast.</p>
+    <p>Momentan erscheinen die Fragen daher in zufälliger Folge. </p>
+    <p class="btn-group"><a href="<%= signup_url %>" class="btn btn-warning">Jetzt anmelden</a>
+    <a href="<%= users_login_url %>" class="btn">Einloggen</a></p>
+  </div>
+  
+  <h3>Mini-Statistik</h3>
+  <p>Richtig beantwortet: <span class="badge badge-success pull-right" id="ans_num_corr">0</span></p>
+  <div class="progress progress-success">
+    <div id="ans_corr" class="bar" style="width: 0%"></div>
+  </div>
+  <p>Falsch beantwortet: <span class="badge badge-important pull-right" id="ans_num_wrong">0</span></p>
+  <div class="progress progress-danger">
+    <div id="ans_wrong" class="bar" style="width: 0%"></div>
+  </div>
+  <p class="muted">Hinweis: Die Statistik wird nur gespeichert, solange du diese
+  Seite geöffnet hast. </p>
+<% end %>
+</div>
+</div>
+
+<script>
+  shuffle = function(o){ //v1.0
+      for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+      return o;
+  };
+  $(function() {
+    var $q = $(".question-block");
+    var qu_id;
+    var ans, again=0;
+    var ans_corr=0,ans_wrong=0,ans_max=100;
+    $q.find("a").each(function(idx, el) {
+      $(el).click(function() {
+        if (again == 1) {
+          $q.css("opacity", 0.5);
+          loadQuestion();
+        } else if (again > 1) {
+        } else if (ans[idx].corr) {
+          $(el).addClass("success").find(".label").addClass("label-success");
+          sendResponse("correct"); ans_corr++;
+        } else {
+          $(el).find(".label").addClass("label-important");
+          $q.find("span.corr").addClass("label-success").closest("a").addClass("success");
+          sendResponse("wrong"); ans_wrong++;
+        }
+        again++;
+        updateStats();
+      });
+    });
+    
+    function updateStats() {
+      if(ans_corr>ans_max || ans_wrong>ans_max) ans_max+=100;
+      $("#ans_corr").css('width', ans_corr/ans_max*100+"%"); $("#ans_wrong").css('width', ans_wrong/ans_max*100+"%");
+      $("#ans_num_corr").html(ans_corr); $("#ans_num_wrong").html(ans_wrong);
+      if (window.login) {
+        $("#ministats").load("/ask/statistics.js");
+      }
+    }
+    function sendResponse(ans_response) {
+      if (window.login) {
+        $.ajax({
+          type: "PUT", url: "/ask/answer",
+          data: {question: qu_id, answer: ans_response},
+          success: function() {
+          }
+        });
+      }
+    }
+    
+    function loadQuestion() {
+      $.get("/ask/nextquestion.json", function(data) {
+        qu_id = data.dispid;
+        $q.find(".question").html("<b>"  + data.dispid + ".</b> " + data.question);
+        $q.css("opacity", 1);
+        
+        ans = [
+          {corr:true, t:data.correctanswer},
+          {corr:false, t:data.wronganswer1},
+          {corr:false, t:data.wronganswer2},
+          {corr:false, t:data.wronganswer3}
+        ];
+        ans=shuffle(ans);
+        
+        again=0;
+        var letter = 65;
+        $q.find("a").each(function(idx,el) {
+          $(el).html("<span class='label"+(ans[idx].corr?" corr":"")+"'>"
+                     + String.fromCharCode(letter++) + "</span> <span class='text'>"
+                     + ans[idx].t + "</span>")
+          .removeClass("success");
+        });
+        
+      });
+    }
+    loadQuestion();
+    
+    $(".alert .close").click(function() { $(this).closest(".alert").remove(); })
+  });
+</script>
+

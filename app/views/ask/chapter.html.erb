@@ -1,0 +1,36 @@
+<h2><%= @chapter.name %></h2>
+<div class="row">
+  <div class="span4">
+    <div class="well" style="padding: 8px 0;">
+      <ul class="nav nav-list">
+        <% @subchapters.each do |sc| %>
+        <% if sc.children.count > 0 then %>
+          <li class="nav-header" title="<%= sc.name %>"><%= sc.name.truncate(40) %></li>
+          <% sc.children.each do |ssc| %>
+          <li class="<%= (ssc.id==@curid) ? 'active' : '' %>" title="<%= ssc.name %>"><%= link_to ssc.name.truncate(40), ask_sub_chapter_url(:dispid => @chapter.dispid, :subid => ssc.id) %></a></li>
+          <% end %>
+        <% else %>
+          <li class="nav-header <%= (sc.id==@curid) ? 'active' : '' %>" title="<%= sc.name %>"><%= link_to sc.name.truncate(40), ask_sub_chapter_url(:dispid => @chapter.dispid, :subid => sc.id)  %></li>
+        <% end %>
+        
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="span8">
+    <% if @questions then %>
+    <% @questions.each do |ques| %>
+    <ul class="nav nav-tabs nav-stacked question-block">
+      <li><span class="question"><b><%= ques.dispid %>.</b> <%= ques.question %></span></li>
+      <li><a href="#"><span class="label label-success">A</span> <%= ques.correctanswer %></a></li>
+      <li><a href="#"><span class="label label-important">B</span> <%= ques.wronganswer1 %></a></li>
+      <li><a href="#"><span class="label label-important">C</span> <%= ques.wronganswer2 %></a></li>
+      <li><a href="#"><span class="label label-important">D</span> <%= ques.wronganswer3 %></a></li>
+    </ul>
+    <% end %>
+    <% else %>
+      Bitte wähle ein Unterkapitel aus.
+    <% end %>
+    
+  </div>
+</div>

@@ -1,0 +1,16 @@
+ <%=debug @stats %> <table class="table stattable">
+    <tr><th colspan=2>Kästchen</th><th colspan=2>Anzahl und Fortschritt</th></tr>
+    
+    <tr><td colspan=2>Gesamter Fragenkatalog</td><td width=40%></td><td width=5% align=right><%= @stats[0] %></td></tr>
+    
+    <% ["Neu (ungelernt)", "Ahnungslos", "Anfänger", "Fortgeschritten", "Experte", "Professor"].each_with_index do |text, idx| %>
+    
+    <tr><td width=5%><span class="badge"><%= idx %>.</span></td><td><%= text %></td>
+    <td><div class="progress"><div class="bar" style="width: <%=@stats[idx+1].to_f*100/@stats[0] %>%;"></div></div></td>
+    <td><%= @stats[idx+1] %></td>
+    </tr>
+    <% end %>
+    
+    </tr>
+    
+  </table>

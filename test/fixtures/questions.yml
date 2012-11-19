@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  chapter: 
+  dispid: MyString
+  question: MyText
+  correctanswer: MyText
+  wronganswer1: MyText
+  wronganswer2: MyText
+  wronganswer3: MyText
+
+two:
+  chapter: 
+  dispid: MyString
+  question: MyText
+  correctanswer: MyText
+  wronganswer1: MyText
+  wronganswer2: MyText
+  wronganswer3: MyText

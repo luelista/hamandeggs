@@ -1,0 +1,47 @@
+
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+html,body{
+height:100%;
+}
+body {
+   padding-top: 60px; /* When using the navbar-top-fixed */
+}
+/* Remove top padding when top navbar goes static in narrow viewports */
+@media (max-width: 979px) {
+  body {
+    padding-top: 0;
+  }
+}
+#wrap{
+min-height: 100%; 
+}
+
+#main{
+overflow:auto;
+padding-bottom:60px; /* this needs to be bigger than footer height*/
+}
+
+.footer {
+position: relative;
+margin-top: -60px; /* negative value of footer height */
+height: 60px;
+clear:both;
+background-color: #eee;
+}
+.footer .container {
+    border-top: 1px solid #ddd;
+    padding-top: 10px; color: #777; text-shadow: 1px 1px 1px #fff;
+}
+
+/* Rails scaffold style compatibility */
+#error_explanation {
+  @extend .alert;
+  @extend .alert-error;
+  @extend .alert-block; /* optional */
+}
+
+.field_with_errors {
+  @extend .control-group.error
+}

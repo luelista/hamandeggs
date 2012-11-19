@@ -1,0 +1,63 @@
+<div class="page-header">
+  <h1>Hallo bei Ham &amp; Eggs <small>dem Online-Trainer zur AFU-Prüfung</small></h1>
+</div>
+<div class="row">
+  <div class="span6">
+    
+    <% if @newUser.errors.any? %>
+    <h3>Fehler</h3>
+    
+      <div id="error_explanation">
+        <h4>Fehler beim Anmelden:</h4>
+  
+        <ul>
+        <% @newUser.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% else %>
+    
+    <img src="/hamandeggs.jpg">
+    
+    
+    
+    <h3>Erst mal gucken</h3>
+    
+    <p>Fühl dich frei, erstmal herumzuklicken und den Trainer auszuprobieren.
+    Oben im Menü kannst du im Fragenkatalog herumstöbern, den Lernmodus und die
+    Prüfungssimulation testen.</p>
+    
+    <h3>Anmelden</h3>
+    
+    <p>Wenn du Ham&Eggs benutzen willst, solltest du dich registrieren - so können
+    deine Lernfortschritte gespeichert werden. Damit werden die Fragen wiederholt, bei denen du
+    Probleme hast. Ham&Eggs arbeitet übrigens nach dem Prinzip der
+    <a href="http://de.wikipedia.org/wiki/Lernkartei">Lernkartei nach Leitner</a>.</p>
+    <p>Wähle die Prüfung aus, auf die du dich vorbereiten willst, und wähle einen
+    Benutzername und ein Passwort - schon kannst du loslegen!</p>
+    
+    <% end %>
+    <p>Find me in app/views/home/index.html.erb</p>
+  </div>
+  <div class="span6">
+    
+    <div class="alert alert-block">
+    <h4>Im Aufbau</h4>
+    
+    <p>
+      Hier entsteht ein Lernprogramm für die AFu-Prüfung.
+      Einerseits bin ich gerade selber dabei mich auf die Prüfung vorzubereiten,
+      und andererseits lerne ich gerade Ruby on Rails und dies ist meine erste
+      Anwendung damit.
+      <b>Augen auf, es wackelt noch ;-)</b>
+    </p>
+    <p>Gruß <a href="http://www.max-weller.de">Max Weller</a></p>
+    </div>
+    
+    <%= render "users/signup" %>
+
+  </div>
+</div>
+
+<p><small class="muted">Bild: http://www.publicdomainpictures.net/pictures/30000/nahled/plate-lunch-pork-ginger-and-fried.jpg</small></p>

@@ -1,0 +1,28 @@
+
+<div class="row"><div class="offset4 span4">
+
+<%= form_tag nil, :class => "login form" do %>
+  <fieldset>
+  <h3>Login</h3>  
+  
+    <label for="user_login">Login:</label>
+    <%= text_field "user", "login", :size => 20 %><br/>
+  
+    <label for="user_password">Password:</label>
+    <%= password_field "user", "password", :size => 20 %><br/>
+  </fieldset>
+
+  <div class="form-actions">
+  <%= submit_tag "Einloggen", :class => "btn" %>
+  </div>
+<% end %>
+</div>
+
+
+</div>
+
+<style>
+  body { background-image: url(http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/wild_oliva.png); }
+  .footer { background-color: rgba(0,0,0,0.5); }
+  .footer .container { border: 0; text-shadow: 1px 1px 1px #000; }
+</style>
